@@ -1,10 +1,10 @@
-package com.bug_report.bug_report;
+package com.bugreport.bugreport;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BugReportApplicationTests {
+class BugreportApplicationTests {
 
 	@Test
 	void contextLoads() {

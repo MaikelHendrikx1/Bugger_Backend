@@ -1,13 +1,13 @@
-package com.bug_report.bug_report;
+package com.bugreport.bugreport;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BugReportApplication {
+public class BugreportApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BugReportApplication.class, args);
+		SpringApplication.run(BugreportApplication.class, args);
 	}
 
 }
