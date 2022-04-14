@@ -11,6 +11,8 @@ public class BugReport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer id;
 
+    public Integer pageId;
+
     public String title;
 
     public String description;

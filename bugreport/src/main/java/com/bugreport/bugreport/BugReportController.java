@@ -13,33 +13,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping(path="/BugReports")
+@RequestMapping(path = "/BugReports")
 public class BugReportController {
     @Autowired
     BugReportService bugReportService;
 
-    @PostMapping(path="/add", consumes = "application/json")
-    public @ResponseBody String addNewBugReport(@RequestBody BugReport br){
+    @PostMapping(path = "/add", consumes = "application/json")
+    public @ResponseBody String addNewBugReport(@RequestBody BugReport br) {
         return bugReportService.addNewBugReport(br);
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<BugReport> getAllBugReports(@RequestParam(required = false) String filter){
-        if (filter == null){
-            return bugReportService.getAllBugReports();
-        }
-        else {
-            return bugReportService.getAllBugReportsByFilter(filter);
-        }
+    @GetMapping(path = "/all")
+    public @ResponseBody Iterable<BugReport> getAllBugReports(
+            @RequestParam(required = false) Integer pageId,
+            @RequestParam(required = false) String filter) {
+        return bugReportService.GetAllBugReports(pageId, filter);      
     }
 
-    @GetMapping(path="/get")
-    public @ResponseBody BugReport getBugReportbyId(@RequestParam Integer id){
+    @GetMapping(path = "/get")
+    public @ResponseBody BugReport getBugReportbyId(@RequestParam Integer id) {
         return bugReportService.getBugReportbyId(id);
     }
 
-    @DeleteMapping(path="/delete")
-    public @ResponseBody void deleteBugReportById(@RequestParam Integer id){
+    @DeleteMapping(path = "/delete")
+    public @ResponseBody void deleteBugReportById(@RequestParam Integer id) {
         bugReportService.deleteBugReportById(id);
     }
 }

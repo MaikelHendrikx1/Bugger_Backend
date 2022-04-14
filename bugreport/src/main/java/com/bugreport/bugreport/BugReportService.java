@@ -13,12 +13,19 @@ public class BugReportService {
         return "Succesfully added " + br.toString();
     }
 
-    public Iterable<BugReport> getAllBugReports(){
-        return bugReportRepository.findAll();
-    }
-
-    public Iterable<BugReport> getAllBugReportsByFilter(String filter){
-        return bugReportRepository.findByTitleContaining(filter);
+    public Iterable<BugReport> GetAllBugReports(Integer pageId, String filter){
+        if (pageId != null && filter != null){
+            return bugReportRepository.findByPageIdEqualsAndTitleContainingIgnoreCase(pageId, filter);
+        }
+        else if (pageId != null) {
+            return bugReportRepository.findByPageId(pageId);
+        }
+        else if (filter != null){
+            return bugReportRepository.findByTitleContainingIgnoreCase(filter);
+        }
+        else {
+            return bugReportRepository.findAll();
+        }
     }
 
     public BugReport getBugReportbyId(Integer id) {
