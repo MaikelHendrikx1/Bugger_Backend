@@ -1,5 +1,6 @@
 package com.buggerpage.buggerpage;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,10 @@ public class BuggerPage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer id;
 
+    @Column(length = 50)
     public String name;
 
+    @Column(length = 5000)
     public String description;
 
     public BuggerPage() {

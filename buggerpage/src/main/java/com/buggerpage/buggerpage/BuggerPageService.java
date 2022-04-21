@@ -19,5 +19,10 @@ public class BuggerPageService {
         else{
             return buggerPageRepository.getAll(amount, filter);
         }
-    }    
+    }
+
+    public String addBuggerPage(BuggerPage bp) {
+        buggerPageRepository.save(bp);
+        return "Succesfully added " + bp.toString();
+    }
 }
