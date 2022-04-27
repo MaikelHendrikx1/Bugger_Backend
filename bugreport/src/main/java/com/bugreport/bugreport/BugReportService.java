@@ -29,7 +29,7 @@ public class BugReportService {
     }
 
     public BugReport getBugReportbyId(Integer id) {
-        return bugReportRepository.findById(id).orElseThrow();
+        return bugReportRepository.findById(id).orElse(null);
     }
 
     public void deleteBugReportById(Integer id) {
