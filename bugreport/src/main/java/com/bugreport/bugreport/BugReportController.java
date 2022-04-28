@@ -21,7 +21,7 @@ public class BugReportController {
     BugReportService bugReportService;
 
     @PostMapping(path = "/add", consumes = "application/json")
-    public @ResponseBody String addNewBugReport(@RequestBody BugReport br) {
+    public @ResponseBody BugReport addNewBugReport(@RequestBody BugReport br) {
         return bugReportService.addNewBugReport(br);
     }
 
@@ -45,6 +45,8 @@ public class BugReportController {
 
     @DeleteMapping(path = "/delete")
     public @ResponseBody void deleteBugReportById(@RequestParam Integer id) {
-        bugReportService.deleteBugReportById(id);
+        if (!bugReportService.deleteBugReportById(id)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Found no bug report with id " + id);
+        }
     }
 }

@@ -20,13 +20,9 @@ public class BugReport {
     public BugReport() {
     }
     
-    public BugReport(String title, String description) {
+    public BugReport(String title, String description, Integer pageId) {
         this.title = title;
         this.description = description;
+        this.pageId = pageId;
     }
-
-    @Override
-    public String toString(){
-        return id + " | " + title + " | " + description;
-    } 
 }

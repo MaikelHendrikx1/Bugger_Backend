@@ -8,9 +8,9 @@ public class BugReportService {
     @Autowired
     private BugReportRepository bugReportRepository;    
 
-    public String addNewBugReport(BugReport br) {
+    public BugReport addNewBugReport(BugReport br) {
         bugReportRepository.save(br);
-        return "Succesfully added " + br.toString();
+        return br;
     }
 
     public Iterable<BugReport> GetAllBugReports(Integer pageId, String filter){
@@ -32,7 +32,13 @@ public class BugReportService {
         return bugReportRepository.findById(id).orElse(null);
     }
 
-    public void deleteBugReportById(Integer id) {
-        bugReportRepository.deleteById(id);
+    public Boolean deleteBugReportById(Integer id) {
+        if (bugReportRepository.existsById(id)){
+            bugReportRepository.deleteById(id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
