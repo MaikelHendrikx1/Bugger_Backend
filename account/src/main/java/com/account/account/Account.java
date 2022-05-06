@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
+import java.util.HexFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class Account {
 
     private byte[] salt;
 
+    private static byte[] pepper = HexFormat.of().parseHex("2f3e4322181546e1965d41d79f2bfc5f5c8ce745ca07585d");
+
     public Account() {
     }
 
@@ -50,11 +53,12 @@ public class Account {
         int outputLength = 32;
         int parallelism = 1;
         Argon2Parameters.Builder builder = new Argon2Parameters.Builder(Argon2Parameters.ARGON2_id)
-                .withVersion(Argon2Parameters.ARGON2_VERSION_13) // 19
+                .withVersion(Argon2Parameters.ARGON2_VERSION_13)
                 .withIterations(opsLimit)
                 .withMemoryAsKB(memLimit)
                 .withParallelism(parallelism)
-                .withSalt(salt);
+                .withSalt(salt)
+                .withSecret(pepper);
         Argon2BytesGenerator gen = new Argon2BytesGenerator();
         gen.init(builder.build());
         byte[] result = new byte[outputLength];
