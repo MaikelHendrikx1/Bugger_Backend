@@ -19,6 +19,9 @@ public class AccountService {
         else if (getAccountByEmail(email) != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An account with email '" + email + "' already exists.");
         } 
+        else if (isPasswordStrongEnough(password) == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password not strong enough: \r\n" + isPasswordStrongEnough(password));
+        }
         else {
             accountRepository.save(new Account(username, email, password));
             throw new ResponseStatusException(HttpStatus.ACCEPTED, "Succesfully created an account. You can now login.");
@@ -42,6 +45,33 @@ public class AccountService {
             else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The entered password is incorrect.");
             }
+        }
+    }
+
+    private String isPasswordStrongEnough(String pw){
+        String message = "";
+
+        if (pw.length() < 12){
+            message += "- Password has to be longer than 12 characters. \r\n";
+        }
+
+        if (!Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])", pw)) {
+            message += "- Password has to contain both lowercase and uppercase letters. \r\n";
+        }
+
+        if (!Pattern.matches("^(?=.*\\d)", pw)) {
+            message += "- Password has to contain atleast one number. \r\n";
+        }
+
+        if (!Pattern.matches("(?=[^A-Za-z0-9])", pw)){
+            message += "- Password has to contain atleast one special character, e.g., ! @ * þ $. \r\n";
+        }
+
+        if (message == "") {
+            return null;
+        }
+        else {
+            return message;
         }
     }
 }
