@@ -20,5 +20,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build with Maven (account)
+      working-directory: ./account
+      run: mvn -B package --file pom.xml   
+    - name: Build with Maven (bugreport)
+      working-directory: ./account
       run: mvn -B package --file pom.xml
+    - name: Build with Maven (buggerpage)
+      working-directory: ./account
+      run: mvn -B package --file pom.xml
+      
+    
