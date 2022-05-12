@@ -22,12 +22,15 @@ jobs:
         cache: maven
     - name: Build with Maven (account)
       working-directory: ./account
-      run: mvn -B package --file pom.xml   
+      run: | 
+        mvn -B package --file pom.xml  
     - name: Build with Maven (bugreport)
-      working-directory: ./account
-      run: mvn -B package --file pom.xml
+      working-directory: ./bugreport
+      run: | 
+        mvn -B package --file pom.xml  
     - name: Build with Maven (buggerpage)
-      working-directory: ./account
-      run: mvn -B package --file pom.xml
+      working-directory: ./buggerpage
+      run: | 
+        mvn -B package --file pom.xml  
       
     
