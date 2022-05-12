@@ -1,5 +1,8 @@
 package com.buggerpage.buggerpage;
 
+
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,5 +35,20 @@ public class BuggerPageController {
     @PostMapping(path = "/add", consumes = "application/json")
     public @ResponseBody String addBuggerPage(@RequestBody BuggerPage bp){
         return buggerPageService.addBuggerPage(bp);
+    }
+
+    @GetMapping(path = "/allByUser")
+    public @ResponseBody Iterable<BuggerPage> getPagesByUserId(@RequestParam Integer userID){
+        return buggerPageService.getAllByUser(userID);
+    }
+
+    @PostMapping(path = "/addMaintainers")
+    public @ResponseBody void addMaintainers(@RequestBody Set<Integer> userIds, @RequestParam Integer pageId){
+        buggerPageService.addMaintainers(userIds, pageId);
+    }
+
+    @PostMapping(path = "/deleteMaintainers")
+    public @ResponseBody void deleteMaintainers(@RequestBody Set<Integer> userIds, @RequestParam Integer pageId) {
+        buggerPageService.deleteMaintainers(userIds, pageId);
     }
 }

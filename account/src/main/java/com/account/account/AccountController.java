@@ -24,4 +24,9 @@ public class AccountController {
     public @ResponseBody Account tryLogin(@RequestParam String email, @RequestParam String password){
         return accountService.tryLogin(email, password);
     }
+
+    @GetMapping(path = "/get")
+    public @ResponseBody Account getAccount(@RequestParam Integer id){
+        return accountService.getAccountById(id);
+    }
 }

@@ -74,4 +74,8 @@ public class AccountService {
             return message;
         }
     }
+
+    public Account getAccountById(Integer id) {
+        return accountRepository.findById(id).orElseThrow();
+    }
 }

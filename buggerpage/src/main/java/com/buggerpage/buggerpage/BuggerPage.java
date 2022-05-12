@@ -1,6 +1,9 @@
 package com.buggerpage.buggerpage;
 
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +20,11 @@ public class BuggerPage {
 
     @Column(length = 5000)
     public String description;
+
+    public Integer ownerId;
+
+    @ElementCollection
+    public Set<Integer> maintainers;
 
     public BuggerPage() {
     }

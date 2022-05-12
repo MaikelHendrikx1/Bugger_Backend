@@ -1,5 +1,7 @@
 package com.buggerpage.buggerpage;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,26 @@ public class BuggerPageService {
     public String addBuggerPage(BuggerPage bp) {
         buggerPageRepository.save(bp);
         return "Succesfully added " + bp.toString();
+    }
+
+    public Iterable<BuggerPage> getAllByUser(Integer userID){
+        var a = buggerPageRepository.findByOwnerId(userID);
+        var b = buggerPageRepository.findByMaintainerId(userID);
+        
+        a.addAll(b);
+
+        return a;
+    }
+
+    public void addMaintainers(Set<Integer> userIds, Integer pageId) {
+        var entity = buggerPageRepository.findById(pageId).orElseThrow();
+        entity.maintainers.addAll(userIds);
+        buggerPageRepository.save(entity);
+    }
+
+    public void deleteMaintainers(Set<Integer> userIds, Integer pageId) {
+        var entity = buggerPageRepository.findById(pageId).orElseThrow();
+        entity.maintainers.removeAll(userIds);
+        buggerPageRepository.save(entity);
     }
 }

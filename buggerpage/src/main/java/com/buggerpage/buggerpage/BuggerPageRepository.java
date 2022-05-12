@@ -1,5 +1,7 @@
 package com.buggerpage.buggerpage;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,4 +17,9 @@ public interface BuggerPageRepository extends CrudRepository<BuggerPage, Integer
 
     @Query(nativeQuery = true, value = "SELECT * FROM bugger_page b WHERE name LIKE %?2% LIMIT ?1")
     public Iterable<BuggerPage> getAll(Integer amount, String filter);
+
+    public List<BuggerPage> findByOwnerId(Integer ownerId);
+
+    @Query(nativeQuery = true, value = "SELECT id, description, name, owner_id FROM bugger_page INNER JOIN bugger_page_maintainers WHERE maintainers=?1")
+    public List<BuggerPage> findByMaintainerId(Integer userId);
 }
