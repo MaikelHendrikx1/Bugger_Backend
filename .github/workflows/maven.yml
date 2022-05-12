@@ -24,16 +24,13 @@ jobs:
       working-directory: ./account
       run: | 
         mvn -B package --file pom.xml  
-        mvn test
     - name: Build with Maven (bugreport)
-      working-directory: ./account
+      working-directory: ./bugreport
       run: | 
         mvn -B package --file pom.xml  
-        mvn test
     - name: Build with Maven (buggerpage)
-      working-directory: ./account
+      working-directory: ./buggerpage
       run: | 
         mvn -B package --file pom.xml  
-        mvn test
       
     
