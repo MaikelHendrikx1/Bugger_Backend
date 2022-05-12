@@ -75,8 +75,6 @@ public class BugReportEndToEndTests {
 
     @Test
     public void GetShouldReturn400WhenIdDoesNotExist() throws Exception {
-        Assert.isTrue(false, "bruh");
-
         MvcResult result = this.mockMvc.perform(get("/BugReports/get").param("id", "832758"))
                 .andDo(print()).andReturn();
 
