@@ -28,10 +28,6 @@ public class AccountService {
         }
     }
 
-    public Account getAccountByEmail(String email){
-        return accountRepository.findByEmail(email);
-    }
-
     public Account tryLogin(String email, String password){
         Account account = getAccountByEmail(email);
 
@@ -76,6 +72,12 @@ public class AccountService {
     }
 
     public Account getAccountById(Integer id) {
-        return accountRepository.findById(id).orElseThrow();
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Found no account with id " + id));
+    }
+
+    public Account getAccountByEmail(String email) {
+        return accountRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Found no account with email " + email));
     }
 }

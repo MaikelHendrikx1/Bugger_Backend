@@ -29,4 +29,9 @@ public class AccountController {
     public @ResponseBody Account getAccount(@RequestParam Integer id){
         return accountService.getAccountById(id);
     }
+
+    @GetMapping(path = "/getByEmail")
+    public @ResponseBody Account getAccount(@RequestParam String email) {
+        return accountService.getAccountByEmail(email);
+    }
 }

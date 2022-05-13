@@ -1,5 +1,7 @@
 package com.account.account;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -8,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
 // Advanced custom queries can be added with : 'https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query'
 
 public interface AccountRepository extends CrudRepository<Account, Integer> {
-    public Account findByEmail(String email);
+    public Optional<Account> findByEmail(String email);
 }
