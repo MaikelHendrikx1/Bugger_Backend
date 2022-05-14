@@ -3,7 +3,9 @@ package com.buggerpage.buggerpage;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class BuggerPageService {
@@ -24,8 +26,13 @@ public class BuggerPageService {
     }
 
     public String addBuggerPage(BuggerPage bp) {
-        buggerPageRepository.save(bp);
-        return "Succesfully added " + bp.toString();
+        if (!buggerPageRepository.findByName(bp.name).isPresent()){
+            buggerPageRepository.save(bp);
+            return "Succesfully added " + bp.toString();
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "A bugger page with this name already exists.");
+        }
     }
 
     public Iterable<BuggerPage> getAllByUser(Integer userID){

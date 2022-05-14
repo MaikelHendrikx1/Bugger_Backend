@@ -77,7 +77,6 @@ public class AccountService {
     }
 
     public Account getAccountByEmail(String email) {
-        return accountRepository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Found no account with email " + email));
+        return accountRepository.findByEmail(email).orElse(null);
     }
 }
