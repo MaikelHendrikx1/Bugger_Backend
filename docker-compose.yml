@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  buggerpage:
+    build: ./buggerpage
+    ports:
+      - "6001:6001"
+
+  bugreport:
+    build: ./bugreport
+    ports:
+      - "6002:6002"
+
+  account:
+    build: ./account
+    ports:
+      - "6003:6003"
