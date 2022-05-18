@@ -32,9 +32,13 @@ jobs:
        
        
        
-  publish: 
+  publish_buggerpage: 
     needs: build_and_test
     runs-on: ubuntu-latest
+    name: publish bugger page
+    defaults: 
+      run: 
+        working-directory: ./buggerpage
     
     steps:
     - uses: actions/checkout@v3
@@ -52,7 +56,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./buggerpage/dockerfile
+        file: ./dockerfile
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/buggerpage:latest
       
